@@ -95,7 +95,7 @@ class AddExpenseFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val expense = expenseRepository.getAllExpenses()
             withContext(Dispatchers.Main) {
-                binding.textView.text = expense.toString()
+                binding.textView.text = expenseRepository.getAllExpenses().size.toString()
             }
         }
 
