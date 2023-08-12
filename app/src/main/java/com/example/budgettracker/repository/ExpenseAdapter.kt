@@ -53,13 +53,13 @@ import com.example.budgettracker.model.Expense
         return expenseList.size
     }
 
-    fun setAnimalList(animals: List<Expense>) {
+    fun setExpenseList(expense: List<Expense>) {
         expenseList.clear()
-        expenseList.addAll(animals)
+        expenseList.addAll(expense)
     }
     @SuppressLint("NotifyDataSetChanged")
-    fun updateAnimals(newAnimals: MutableList<Expense>) {
-        expenseList = newAnimals
+    fun updateAnimals(newExpense: MutableList<Expense>) {
+        expenseList = newExpense
         notifyDataSetChanged()
     }
 

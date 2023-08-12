@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.budgettracker.databinding.FragmentMainBinding
+import com.example.budgettracker.model.Expense
+import com.example.budgettracker.repository.ExpenseAdapter
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -17,7 +20,7 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
      var expenseListener: AddExpenseListener? = null
     var incomeListener: AddEIncomeListener? = null
-
+    private lateinit var expenseAdapter: ExpenseAdapter
 
 
     interface AddExpenseListener{
@@ -52,6 +55,21 @@ class MainFragment : Fragment() {
                 incomeListener?.addIncome()
             }
         }
+        expenseAdapter = ExpenseAdapter()
+
+       
+        binding.expenseRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = expenseAdapter
+        }
+
+
+        val exampleExpenseList = mutableListOf<Expense>(
+
+        )
+
+
+        expenseAdapter.updateAnimals(exampleExpenseList)
     }
 
     companion object {

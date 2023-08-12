@@ -88,7 +88,7 @@ class AddIncomeFragment : Fragment() {
         }
 
 //        lifecycleScope.launch(Dispatchers.IO) {
-//            val expense = incomeRepository.getAllIncomes()
+//            val income = incomeRepository.getAllIncomes()
 //            withContext(Dispatchers.Main) {
 //                binding.textView.text = expense.toString()
 //            }
@@ -101,7 +101,7 @@ class AddIncomeFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            AddExpenseFragment().apply {
+            AddIncomeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

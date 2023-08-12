@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity(),MainFragment.AddExpenseListener,MainFra
         setContentView(binding.root)
 
         val mainFragment = MainFragment.newInstance("", "")
-       // mainFragment.listener = this
+       mainFragment.expenseListener = this
+        mainFragment.incomeListener = this
         supportFragmentManager.beginTransaction()
             .add(R.id.container, mainFragment)
             .commit()

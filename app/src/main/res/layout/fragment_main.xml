@@ -54,6 +54,7 @@
         app:srcCompat="@drawable/minus" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/expense_recycler_view"
         android:layout_width="407dp"
         android:layout_height="483dp"
         app:layout_constraintEnd_toEndOf="parent"
