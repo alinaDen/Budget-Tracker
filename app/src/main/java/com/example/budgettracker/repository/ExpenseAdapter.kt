@@ -45,8 +45,8 @@ import com.example.budgettracker.model.Expense
     }
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
-        val animal = expenseList[position]
-        holder.bind(animal)
+        val expense= expenseList[position]
+        holder.bind(expense)
     }
 
     override fun getItemCount(): Int {
@@ -58,7 +58,7 @@ import com.example.budgettracker.model.Expense
         expenseList.addAll(expense)
     }
     @SuppressLint("NotifyDataSetChanged")
-    fun updateAnimals(newExpense: MutableList<Expense>) {
+    fun updateExpense(newExpense: MutableList<Expense>) {
         expenseList = newExpense
         notifyDataSetChanged()
     }

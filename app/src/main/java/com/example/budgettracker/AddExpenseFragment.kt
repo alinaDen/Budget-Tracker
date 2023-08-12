@@ -86,6 +86,10 @@ class AddExpenseFragment : Fragment() {
             lifecycleScope.launch(Dispatchers.IO) {
                 expenseRepository.insertIExpense(Expense(1,selectedCategoryIndex, amount, ""))
             }
+            requireFragmentManager().beginTransaction()
+                .replace(R.id.container, MainFragment.newInstance("", ""))
+                .commit()
+
         }
 
         lifecycleScope.launch(Dispatchers.IO) {

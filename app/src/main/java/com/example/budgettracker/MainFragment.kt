@@ -55,21 +55,7 @@ class MainFragment : Fragment() {
                 incomeListener?.addIncome()
             }
         }
-        expenseAdapter = ExpenseAdapter()
 
-       
-        binding.expenseRecyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = expenseAdapter
-        }
-
-
-        val exampleExpenseList = mutableListOf<Expense>(
-
-        )
-
-
-        expenseAdapter.updateAnimals(exampleExpenseList)
     }
 
     companion object {
