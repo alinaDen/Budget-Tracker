@@ -32,4 +32,10 @@ class IncomeRepository(val incomeDao: IncomeDao) {
             incomeDao.deleteAll()
         }
     }
+
+    suspend fun getTotalIncome(): Double {
+        return incomeScope.async {
+            incomeDao.getTotalIncome()
+        }.await()
+    }
 }

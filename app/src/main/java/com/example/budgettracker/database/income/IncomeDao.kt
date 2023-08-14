@@ -28,4 +28,6 @@ interface IncomeDao {
 
     @Query("DELETE FROM incomes")
     fun deleteAll()
+    @Query("SELECT SUM(amount) FROM incomes")
+    suspend fun getTotalIncome(): Double
 }

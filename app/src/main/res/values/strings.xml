@@ -7,4 +7,5 @@
     <string name="add_income">Add Income</string>
     <string name="dollar">$</string>
     <string name="add_expense">Add Expense</string>
+    <string name="total_expenses">total expenses</string>
 </resources>

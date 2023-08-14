@@ -13,6 +13,7 @@ import com.example.budgettracker.databinding.FragmentMainBinding
 import com.example.budgettracker.model.Expense
 import com.example.budgettracker.repository.ExpenseAdapter
 import com.example.budgettracker.repository.ExpenseRepository
+import com.example.budgettracker.repository.IncomeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,6 +30,7 @@ class MainFragment : Fragment() {
     var incomeListener: AddEIncomeListener? = null
     private lateinit var expenseAdapter: ExpenseAdapter
     private  val expenseRepository = ExpenseRepository(MyBudgetApp.INSTANCE.database.expenseDao())
+    private  val incomeRepository= IncomeRepository(MyBudgetApp.INSTANCE.database.incomeDao())
 
 
     interface AddExpenseListener{
@@ -81,6 +83,34 @@ class MainFragment : Fragment() {
         }
 
 
+        lifecycleScope.launch(Dispatchers.IO) {
+            val totalExpenses = expenseRepository.getTotalExpenses()
+
+            withContext(Dispatchers.Main) {
+                binding.decreaseAmount.text  = totalExpenses.toString()
+
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val totalIncomes = incomeRepository.getTotalIncome()
+
+            withContext(Dispatchers.Main) {
+                binding.increaseAmount.text  = totalIncomes.toString()
+
+            }
+        }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val totalIncomes = incomeRepository.getTotalIncome()
+            val totalExpenses = expenseRepository.getTotalExpenses()
+            val balance = totalIncomes-totalExpenses
+            val formattedBalance = String.format("%.2f", balance)
+
+            withContext(Dispatchers.Main) {
+                binding.balanceValue.text  = formattedBalance
+
+            }
+        }
 
 
 

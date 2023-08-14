@@ -32,4 +32,10 @@ class ExpenseRepository(val expenseDao: ExpenseDao) {
             expenseDao.deleteAll()
         }
     }
+
+    suspend fun getTotalExpenses(): Double {
+        return expenseScope.async {
+            expenseDao.getTotalExpenses()
+        }.await()
+    }
 }
