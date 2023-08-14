@@ -81,14 +81,6 @@ class MainFragment : Fragment() {
         }
 
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val expense = expenseRepository.getAllExpenses()
-            withContext(Dispatchers.Main) {
-                expenseAdapter.setExpenseList(expense)
-                expenseAdapter.notifyDataSetChanged()
-            }
-        }
-
 
 
 

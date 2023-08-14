@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="_0">0</string>
     <string name="expense_amount">expense_amount</string>
+    <string name="add_income">Add Income</string>
+    <string name="dollar">$</string>
+    <string name="add_expense">Add Expense</string>
 </resources>
