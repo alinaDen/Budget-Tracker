@@ -20,18 +20,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddIncomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class AddIncomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -58,9 +52,9 @@ class AddIncomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner: Spinner = view.findViewById(R.id.category_spinner)
-        val items = listOf("Salary", "Presents", "Other")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items.sorted())
+        val spinner: Spinner = view.findViewById(R.id.category_spinner1)
+        val items = listOf("Salary", "Gift", "Other")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
@@ -90,13 +84,6 @@ class AddIncomeFragment : Fragment() {
                 .commit()
 
         }
-
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val income = incomeRepository.getAllIncomes()
-//            withContext(Dispatchers.Main) {
-//                binding.textView.text = expense.toString()
-//            }
-//        }
 
     }
 

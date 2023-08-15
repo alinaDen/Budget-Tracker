@@ -14,3 +14,14 @@ data class Income(
     val dateAdded: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0)
+
+
+{companion object {
+    const val TYPE_SALARY: Byte = 1
+    const val TYPE_GIFT: Byte = 2
+    const val TYPE_OTHER: Byte = 3
+
+
+
+
+}}

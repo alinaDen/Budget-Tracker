@@ -25,11 +25,6 @@ import kotlinx.coroutines.withContext
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AddExpenseFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddExpenseFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -83,6 +78,9 @@ class AddExpenseFragment : Fragment() {
                 text?.clear()
                 textVar.toDouble()
             }
+            
+
+
             lifecycleScope.launch(Dispatchers.IO) {
                 expenseRepository.insertIExpense(Expense(selectedCategoryIndex, amount, ""))
             }
@@ -92,18 +90,10 @@ class AddExpenseFragment : Fragment() {
 
         }
 
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val expense = expenseRepository.getAllExpenses()
-//            withContext(Dispatchers.Main) {
-//                binding.textView.text = expenseRepository.getAllExpenses().size.toString()
-//            }
-//        }
 
     }
 
     companion object {
-
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AddExpenseFragment().apply {

@@ -8,4 +8,8 @@
     <string name="dollar">$</string>
     <string name="add_expense">Add Expense</string>
     <string name="total_expenses">total expenses</string>
+    <string name="income_amount">income_amount</string>
+    <string name="expenses">expenses</string>
+    <string name="incomes">incomes</string>
+    <string name="date">date</string>
 </resources>

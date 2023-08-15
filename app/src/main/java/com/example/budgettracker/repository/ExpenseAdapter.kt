@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.budgettracker.R
 import com.example.budgettracker.databinding.ExpenseItemBinding
 import com.example.budgettracker.model.Expense
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-    class ExpenseAdapter : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
+class ExpenseAdapter : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
     private var expenseList: MutableList<Expense> = mutableListOf()
     inner class ExpenseViewHolder(private val itemBinding: ExpenseItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
@@ -35,7 +38,9 @@ import com.example.budgettracker.model.Expense
             }
 
 
-
+            val pattern = "dd.MM.yy HH:mm"
+            val sdf = SimpleDateFormat(pattern, Locale.getDefault())
+            itemBinding.dateExpenseItem.text = sdf.format(Date(expense.dateAdded))
         }
     }
 
@@ -56,7 +61,7 @@ import com.example.budgettracker.model.Expense
     fun setExpenseList(expense: List<Expense>) {
         expenseList.clear()
         expenseList.addAll(expense)
-    }
+        notifyDataSetChanged()    }
     @SuppressLint("NotifyDataSetChanged")
     fun updateExpense(newExpense: MutableList<Expense>) {
         expenseList = newExpense

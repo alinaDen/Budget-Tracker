@@ -25,6 +25,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/expense_amount"
+        android:layout_marginStart="20dp"
         android:textColor="#FF0000"/>
+
+    <TextView
+        android:id="@+id/date_expense_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/date"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="80dp"/>
 </LinearLayout>
 </androidx.cardview.widget.CardView>

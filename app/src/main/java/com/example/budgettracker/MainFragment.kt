@@ -14,6 +14,7 @@ import com.example.budgettracker.databinding.FragmentMainBinding
 import com.example.budgettracker.model.Expense
 import com.example.budgettracker.repository.ExpenseAdapter
 import com.example.budgettracker.repository.ExpenseRepository
+import com.example.budgettracker.repository.IncomeAdapter
 import com.example.budgettracker.repository.IncomeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class MainFragment : Fragment() {
      var expenseListener: AddExpenseListener? = null
     var incomeListener: AddEIncomeListener? = null
     private lateinit var expenseAdapter: ExpenseAdapter
+    private lateinit var incomeAdapter: IncomeAdapter
     private  val expenseRepository = ExpenseRepository(MyBudgetApp.INSTANCE.database.expenseDao())
     private  val incomeRepository= IncomeRepository(MyBudgetApp.INSTANCE.database.incomeDao())
 
@@ -67,18 +69,13 @@ class MainFragment : Fragment() {
         with(binding){
             addExpenseButton.setOnClickListener{
                 expenseListener?.addExpense()
-//                binding.addExpenseButton.setOnClickListener {
-//                    expenseListener?.addExpense()
-
-//                }
-
 
             }
-            binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+           expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             expenseAdapter = ExpenseAdapter()
-            binding.expenseRecyclerView.adapter = expenseAdapter
+            expenseRecyclerView.adapter = expenseAdapter
             lifecycleScope.launch(Dispatchers.IO) {
-                val expense = expenseRepository.getAllExpenses()
+                val expense = expenseRepository.getAllExpenses().reversed()
                 withContext(Dispatchers.Main) {
                     expenseAdapter.setExpenseList(expense)
                     expenseAdapter.notifyDataSetChanged()
@@ -86,6 +83,16 @@ class MainFragment : Fragment() {
             }
             addIncomeButton.setOnClickListener {
                 incomeListener?.addIncome()
+            }
+            incomeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            incomeAdapter = IncomeAdapter()
+            incomeRecyclerView.adapter = incomeAdapter
+            lifecycleScope.launch(Dispatchers.IO) {
+                val income = incomeRepository.getAllIncomes().reversed()
+                withContext(Dispatchers.Main) {
+                    incomeAdapter.setIncomeList(income)
+                    incomeAdapter.notifyDataSetChanged()
+                }
             }
         }
 
