@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 
 import com.example.budgettracker.databinding.FragmentAddExpenseBinding
@@ -73,23 +74,32 @@ class AddExpenseFragment : Fragment() {
 
 
         binding.saveButton.setOnClickListener {
-            val amount = amountEditText.run {
-                val textVar = text.toString()
-                text?.clear()
-                textVar.toDouble()
+            val amountText = amountEditText.text?.toString()
+
+            amountText?.run {
+                if (isNotEmpty()) {
+                    try {
+                        val amount = toDouble()
+
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            expenseRepository.insertIExpense(Expense(selectedCategoryIndex, amount, ""))
+                        }
+
+                        requireFragmentManager().beginTransaction()
+                            .replace(R.id.container, MainFragment.newInstance("", ""))
+                            .commit()
+                    } catch (e: NumberFormatException) {
+
+                        val message = "Invalid amount format"
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+
+                    val message = "Field cannot be empty"
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
             }
-            
-
-
-            lifecycleScope.launch(Dispatchers.IO) {
-                expenseRepository.insertIExpense(Expense(selectedCategoryIndex, amount, ""))
-            }
-            requireFragmentManager().beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance("", ""))
-                .commit()
-
         }
-
 
     }
 
