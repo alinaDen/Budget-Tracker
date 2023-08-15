@@ -1,6 +1,7 @@
 package com.example.budgettracker
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,6 +41,11 @@ class MainFragment : Fragment() {
         fun addIncome()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        expenseListener = requireActivity() as? AddExpenseListener
+        incomeListener = requireActivity() as? AddEIncomeListener
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -61,21 +67,22 @@ class MainFragment : Fragment() {
         with(binding){
             addExpenseButton.setOnClickListener{
                 expenseListener?.addExpense()
-                binding.addExpenseButton.setOnClickListener {
-                    expenseListener?.addExpense()
-                    binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-                    expenseAdapter = ExpenseAdapter()
-                    binding.expenseRecyclerView.adapter = expenseAdapter
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val expense = expenseRepository.getAllExpenses()
-                        withContext(Dispatchers.Main) {
-                            expenseAdapter.setExpenseList(expense)
-                            expenseAdapter.notifyDataSetChanged()
-                        }
-                    }
+//                binding.addExpenseButton.setOnClickListener {
+//                    expenseListener?.addExpense()
+
+//                }
+
+
+            }
+            binding.expenseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            expenseAdapter = ExpenseAdapter()
+            binding.expenseRecyclerView.adapter = expenseAdapter
+            lifecycleScope.launch(Dispatchers.IO) {
+                val expense = expenseRepository.getAllExpenses()
+                withContext(Dispatchers.Main) {
+                    expenseAdapter.setExpenseList(expense)
+                    expenseAdapter.notifyDataSetChanged()
                 }
-
-
             }
             addIncomeButton.setOnClickListener {
                 incomeListener?.addIncome()
@@ -84,26 +91,29 @@ class MainFragment : Fragment() {
 
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val totalExpenses = expenseRepository.getTotalExpenses()
+            val totalExpenses = expenseRepository.getTotalExpenses()?: 0.00
+
+            val formattedExpense = String.format("%.2f", totalExpenses)
 
             withContext(Dispatchers.Main) {
-                binding.decreaseAmount.text  = totalExpenses.toString()
+                binding.decreaseAmount.text  = formattedExpense
 
             }
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val totalIncomes = incomeRepository.getTotalIncome()
+            val totalIncomes = incomeRepository.getTotalIncome()?: 0.00
+            val formattedIncome = String.format("%.2f", totalIncomes)
 
             withContext(Dispatchers.Main) {
-                binding.increaseAmount.text  = totalIncomes.toString()
+                binding.increaseAmount.text  = formattedIncome
 
             }
         }
         lifecycleScope.launch(Dispatchers.IO) {
-            val totalIncomes = incomeRepository.getTotalIncome()
-            val totalExpenses = expenseRepository.getTotalExpenses()
-            val balance = totalIncomes-totalExpenses
+            val totalIncomes = incomeRepository.getTotalIncome() ?: 0.00
+            val totalExpenses = expenseRepository.getTotalExpenses() ?: 0.00
+            val balance = (totalIncomes - totalExpenses)
             val formattedBalance = String.format("%.2f", balance)
 
             withContext(Dispatchers.Main) {

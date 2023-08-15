@@ -61,7 +61,7 @@ class AddExpenseFragment : Fragment() {
         val spinner: Spinner = view.findViewById(R.id.category_spinner)
         val items = listOf("Food", "Transport", "Medicine","Cosmetics","Clothes","Vacations","Education","Sport","Restaurants",
         "Entertainment","Vehicle","Other","Savings")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items.sorted())
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
@@ -84,7 +84,7 @@ class AddExpenseFragment : Fragment() {
                 textVar.toDouble()
             }
             lifecycleScope.launch(Dispatchers.IO) {
-                expenseRepository.insertIExpense(Expense(1,selectedCategoryIndex, amount, ""))
+                expenseRepository.insertIExpense(Expense(selectedCategoryIndex, amount, ""))
             }
             requireFragmentManager().beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance("", ""))

@@ -16,7 +16,7 @@ interface ExpenseDao {
     fun insert(expense: Expense)
 
     @Query("UPDATE expenses SET amount = :newAmount WHERE id = :id")
-    fun updateAmount(id: Int, newAmount: Double)
+    fun updateAmount(id: Int, newAmount: Double?)
 
     @Query("UPDATE expenses SET description = :newDescription WHERE id = :id")
     fun updateDescription(id: Int, newDescription: String)
@@ -31,6 +31,6 @@ interface ExpenseDao {
     fun deleteAll()
 
     @Query("SELECT SUM(amount) FROM expenses")
-    suspend fun getTotalExpenses(): Double
+    suspend fun getTotalExpenses(): Double?
 
 }

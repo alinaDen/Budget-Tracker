@@ -33,7 +33,7 @@ class IncomeRepository(val incomeDao: IncomeDao) {
         }
     }
 
-    suspend fun getTotalIncome(): Double {
+    suspend fun getTotalIncome(): Double? {
         return incomeScope.async {
             incomeDao.getTotalIncome()
         }.await()

@@ -33,7 +33,7 @@ class ExpenseRepository(val expenseDao: ExpenseDao) {
         }
     }
 
-    suspend fun getTotalExpenses(): Double {
+    suspend fun getTotalExpenses(): Double? {
         return expenseScope.async {
             expenseDao.getTotalExpenses()
         }.await()

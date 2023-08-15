@@ -83,7 +83,7 @@ class AddIncomeFragment : Fragment() {
                 textVar.toDouble()
             }
             lifecycleScope.launch(Dispatchers.IO) {
-                incomeRepository.insertIncome(Income(1,selectedCategoryIndex, amount, ""))
+                incomeRepository.insertIncome(Income(selectedCategoryIndex, amount, ""))
             }
             requireFragmentManager().beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance("", ""))

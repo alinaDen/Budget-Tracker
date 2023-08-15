@@ -13,7 +13,7 @@
         android:text="Balance:"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,12 +93,12 @@
         android:id="@+id/increase_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="total incomes"
+        android:text="0.00"
         tools:layout_editor_absoluteX="131dp"
         tools:layout_editor_absoluteY="197dp"
         app:layout_constraintTop_toBottomOf="@id/increase_image"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="115dp"
+        android:layout_marginStart="145dp"
         android:layout_marginTop="8dp"
         android:textColor="#008000"/>
 
@@ -106,24 +106,35 @@
         android:id="@+id/decrease_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="0.00"
         tools:layout_editor_absoluteX="242dp"
         tools:layout_editor_absoluteY="197dp"
         app:layout_constraintTop_toBottomOf="@id/decrease_image"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="260dp"
         android:textColor="#FF0000"/>
 
     <Button
         android:id="@+id/change_currency_button"
-        android:layout_width="76dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="79dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:text="USD"
         android:backgroundTint="#D3D3D3"
+        android:text="USD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="62dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/wallet"
+        tools:layout_editor_absoluteY="81dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="85dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

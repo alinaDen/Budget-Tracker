@@ -16,7 +16,7 @@ interface IncomeDao {
     fun insert(income: Income)
 
     @Query("UPDATE incomes SET amount = :newAmount WHERE id = :id")
-    fun updateAmount(id: Int, newAmount: Double)
+    fun updateAmount(id: Int, newAmount: Double?)
 
     @Query("UPDATE incomes SET description = :newDescription WHERE id = :id")
     fun updateDescription(id: Int, newDescription: String)
@@ -29,5 +29,5 @@ interface IncomeDao {
     @Query("DELETE FROM incomes")
     fun deleteAll()
     @Query("SELECT SUM(amount) FROM incomes")
-    suspend fun getTotalIncome(): Double
+    suspend fun getTotalIncome(): Double?
 }

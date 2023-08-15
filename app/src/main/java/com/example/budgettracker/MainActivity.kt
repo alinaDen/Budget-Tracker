@@ -14,22 +14,34 @@ class MainActivity : AppCompatActivity(),MainFragment.AddExpenseListener,MainFra
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mainFragment = MainFragment.newInstance("", "")
-       mainFragment.expenseListener = this
-        mainFragment.incomeListener = this
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, mainFragment)
+            .add(R.id.container, MainFragment.newInstance("", ""))
             .commit()
+    }
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.fragments.lastOrNull()?.tag != TAG_MAIN){
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container,MainFragment.newInstance("",""), TAG_MAIN)
+                .commit()
+        }else{
+            super.onBackPressed()
+        }
     }
 
     override fun addExpense(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, AddExpenseFragment.newInstance("",""))
+            .replace(R.id.container, AddExpenseFragment.newInstance("","",), TAG_EXPENSE)
             .commit()
     }
     override fun addIncome(){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, AddIncomeFragment.newInstance("",""))
+            .replace(R.id.container, AddIncomeFragment.newInstance("",""), TAG_INCOME)
             .commit()
+    }
+    companion object{
+        const val TAG_EXPENSE = "AddExpenseFragment"
+        const val TAG_INCOME = "AddIncomeFragment"
+        const val TAG_MAIN = "MainFragment"
     }
 }
